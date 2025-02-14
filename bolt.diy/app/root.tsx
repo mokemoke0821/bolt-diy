@@ -1,9 +1,35 @@
-import React from 'react';
-import { Links, Meta, Outlet, Scripts } from '@remix-run/react';
-import type { LinksFunction } from '@remix-run/node';
-import './styles/main.css';
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from '@remix-run/react'
+import { LinksFunction } from '@remix-run/node'
 
-export default function Root() {
+// UnoCSS のスタイルをインポート
+import '@unocss/reset/tailwind.css'
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.googleapis.com',
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.gstatic.com',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap',
+    },
+  ]
+}
+
+export default function App() {
   return (
     <html lang="ja">
       <head>
@@ -12,10 +38,12 @@ export default function Root() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="font-sans bg-gray-50">
         <Outlet />
+        <ScrollRestoration />
         <Scripts />
+        <LiveReload />
       </body>
     </html>
-  );
+  )
 }
